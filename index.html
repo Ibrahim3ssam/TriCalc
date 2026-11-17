@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>مختبر المثلثات</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{--bg:#0e1514;--cd:#151f1e;--in:#1e2c2a;--bd:#2a3d3a;--fg:#e9f2ef;--mu:#8fa5a0;--ac:#3ddbb0;--a:#ff7b72;--b:#6ea8ff;--c:#f0b429;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:var(--bg)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 "IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif}
+main{max-width:640px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:34px;margin:8px 0 4px}.sub{color:var(--mu);margin:0 0 20px;font-size:17px}
+h3{font-size:16px;margin:16px 0 10px}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:26px;padding:18px;margin-bottom:18px}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.row label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mu);margin-bottom:6px}
+.tag{display:inline-grid;place-items:center;min-width:28px;height:26px;border-radius:8px;color:#101010;font-weight:700;font-family:"JetBrains Mono",monospace}
+input{width:100%;height:56px;border-radius:16px;border:2px solid var(--bd);background:var(--in);color:var(--fg);text-align:center;font:600 22px "JetBrains Mono",ui-monospace,Consolas,monospace;direction:ltr;min-width:0}
+input.giv{border-color:var(--ac);background:#173430}input.cmp{color:#9fb3ae}input.bad{border-color:#ff5d5d}
+input:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.lg{display:flex;gap:14px;flex-wrap:wrap;color:var(--mu);font-size:14px;margin:14px 0}
+.lg i{display:inline-block;width:16px;height:16px;border-radius:5px;border:2px solid var(--ac);vertical-align:-3px;margin-inline-end:6px}.lg i.o{border-color:var(--bd);background:var(--in)}
+.kb,.chips,.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select{font:inherit;color:var(--fg);background:var(--in);border:1px solid var(--bd);border-radius:16px;padding:8px 16px;cursor:pointer;min-height:44px}
+.kb button{font:600 20px "JetBrains Mono",monospace;min-width:48px;padding:4px 10px}
+.chips button.on{border-color:var(--ac);color:var(--ac)}
+.box{background:var(--in);border-radius:16px;padding:14px 18px;margin:12px 0}
+.ctl{margin-top:14px;justify-content:flex-start}
+.mono,td,.pv{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace}
+svg{width:100%;height:auto;display:block;touch-action:none}
+.hint{display:inline-block;border:1px solid var(--bd);border-radius:14px;padding:2px 14px;color:var(--mu);font-size:14px;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;text-align:center}th{padding:10px 4px}td{padding:11px 4px;border-top:1px solid var(--bd)}td:not(:first-child),th.n{direction:ltr;unicode-bidi:isolate}td:first-child,th:first-child{text-align:right;font-family:inherit}
+.pr{background:var(--in);border-radius:16px;padding:10px 16px;margin-bottom:10px}.pr small{display:block;color:var(--mu)}.pv{direction:ltr;text-align:left;font-size:17px}
+.st{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}.st b{flex:none;width:40px;height:40px;border-radius:50%;background:var(--ac);color:#06201a;display:grid;place-items:center;font-weight:700}
+.st div{flex:1;min-width:0}.st pre{margin:8px 0 0;background:var(--in);border-radius:14px;padding:12px 14px;font:16px/1.9 "JetBrains Mono",ui-monospace,Consolas,monospace;direction:ltr;text-align:left;overflow-x:auto;white-space:normal;line-height:2.6}
+.fr{direction:ltr;unicode-bidi:isolate;display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 4px;text-align:center;line-height:1.5}.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 6px 2px}.fr>span:last-child{padding:2px 6px 0}
+</style></head><body><main>
+<h1>مختبر المثلثات</h1>
+<p class="sub">اكتب أي ثلاث قيم (ضلع واحد على الأقل) وهيظهر باقي المثلث ومعاه خطوات الحل. تقدر تكتب الأضلاع بالجذور زي <b dir="ltr">3√5</b> أو <b dir="ltr">√2/2</b>. اسحب أي رأس بالماوس أو بإصبعك وشوف القيم بتتغير لحظيًا.</p>
+<section class="card">
+<h3>الأضلاع</h3><div class="row" id="rs"></div>
+<h3>الزوايا (بالدرجات)</h3><div class="row" id="ra"></div>
+<div class="lg"><span><i></i>معطى</span><span><i class="o"></i>محسوب</span><span>آخر 3 قيم تكتبها هي المعطيات</span></div>
+<h3>أزرار الجذور</h3><div class="kb" id="kb"></div>
+<div class="box" id="stt"></div>
+<h3>أمثلة جاهزة</h3><div class="chips" id="ex"></div>
+<div class="ctl"><button id="clr">مسح الكل</button><span>المنازل العشرية</span><select id="dec"><option>0</option><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></div>
+</section>
+<section class="card"><span class="hint">اسحب الدوائر عند الرؤوس</span><svg id="sv" viewBox="0 0 400 300"></svg><div class="chips" id="ov"></div></section>
+<section class="card"><h3>النسب المثلثية لزوايا المثلث</h3><table id="tt"></table></section>
+<section class="card"><h3>خصائص المثلث</h3><div id="pr"></div></section>
+<section class="card"><h3>خطوات الحل</h3><div id="sp"></div></section>
+</main>
+<script>
+const $=i=>document.getElementById(i),K=['a','b','c','A','B','C'],SD=['a','b','c'],AN=['A','B','C'],O={a:'A',b:'B',c:'C',A:'a',B:'b',C:'c'},CL={a:'#ff7b72',A:'#ff7b72',b:'#6ea8ff',B:'#6ea8ff',c:'#f0b429',C:'#f0b429'},D=Math.PI/180,NS='http://www.w3.org/2000/svg';
+let order=[],sel=0,res=null,foc='a',on={},P=null,T=null,drag=null,dec=2;
+const gcd=(a,b)=>b?gcd(b,a%b):a,sqf=[];
+for(let n=2;n<=600;n++){let ok=true;for(let k=2;k*k<=n;k++)if(n%(k*k)==0){ok=false;break}if(ok)sqf.push(n)}
+function rad(x){const r=Math.round(x);if(Math.abs(x-r)<1e-9)return''+r;
+ for(let q=1;q<=12;q++)for(const n of sqf){const p=x*q/Math.sqrt(n),pr=Math.round(p);if(pr>=1&&pr<=300&&Math.abs(p-pr)<1e-9*pr&&gcd(pr,q)==1)return(pr>1?pr:'')+'√'+n+(q>1?'/'+q:'')}return null}
+const R=x=>rad(x)||x.toFixed(dec),F2=x=>{const r=rad(x),d=x.toFixed(dec);return r&&r!=d&&/√/.test(r)?r+' ≈ '+d:d};
+function parse(t){
+ t=t.replace(/[٠-٩]/g,c=>c.charCodeAt(0)-1632).replace(/[٫,،]/g,'.').replace(/[×·]/g,'*').replace(/÷/g,'/').replace(/[−–]/g,'-').replace(/sqrt|جذر|root/gi,'√').replace(/pi|π/gi,'π').replace(/\s+/g,'');
+ let i=0;const pk=()=>t[i],st=c=>c!==undefined&&/[\d.(√π]/.test(c);
+ const ex=()=>{let v=tm();while(pk()=='+'||pk()=='-'){const o=t[i++],r=tm();v=o=='+'?v+r:v-r}return v};
+ const tm=()=>{let v=un();for(;;){const c=pk();if(c=='*'){i++;v*=un()}else if(c=='/'){i++;v/=un()}else if(st(c))v*=un();else return v}};
+ const un=()=>{if(pk()=='-'){i++;return -un()}if(pk()=='+'){i++;return un()}return pw()};
+ const pw=()=>{let v=at();if(pk()=='^'){i++;v=Math.pow(v,un())}return v};
+ const at=()=>{const c=pk();if(c=='('){i++;const v=ex();if(pk()!=')')throw 0;i++;return v}
+  if(c=='√'){i++;return Math.sqrt(at())}if(c=='π'){i++;return Math.PI}
+  const m=/(\d+\.?\d*|\.\d+)/y;m.lastIndex=i;const r=m.exec(t);if(!r)throw 0;i=m.lastIndex;return+r[0]};
+ const v=ex();if(i<t.length||!isFinite(v))throw 0;return v}
+function solve(g){
+ const S=SD.filter(k=>g[k]!=null),A=AN.filter(k=>g[k]!=null),cl=x=>Math.max(-1,Math.min(1,x)),ac=(x,y,z)=>Math.acos(cl((y*y+z*z-x*x)/(2*y*z)))/D,sn=x=>Math.sin(x*D);
+ const v={...g};
+ if(S.length==3){const{a,b,c}=g;if(a+b<=c+1e-12||a+c<=b+1e-12||b+c<=a+1e-12)return{e:'الأضلاع دي مينفعش تعمل مثلث: مجموع أي ضلعين لازم يكون أكبر من الضلع الثالث.'};
+  v.A=ac(a,b,c);v.B=ac(b,a,c);v.C=ac(c,a,b);return{s:[{v}]}}
+ if(S.length==2&&A.length==1){const X=A[0],x=O[X],m=SD.find(k=>g[k]==null);
+  if(x==m){const[y,z]=SD.filter(k=>k!=m);v[m]=Math.sqrt(g[y]**2+g[z]**2-2*g[y]*g[z]*Math.cos(g[X]*D));
+   const W=AN.filter(k=>k!=X);W.forEach(k=>{const[p,q]=SD.filter(s=>s!=O[k]);v[k]=ac(v[O[k]],v[p],v[q])});v[W[1]]=180-g[X]-v[W[0]];return{s:[{v}]}}
+  const y=SD.find(k=>k!=x&&g[k]!=null),Y=O[y],Z=AN.find(k=>k!=X&&k!=Y),z=O[Z],sy=g[y]*sn(g[X])/g[x];
+  if(sy>1+1e-9)return{e:'مفيش مثلث بالقيم دي (sin الزاوية طلع أكبر من 1).'};
+  const ys=[Math.asin(cl(sy))/D];if(sy<1-1e-9)ys.push(180-ys[0]);const out=[];
+  ys.forEach(Yd=>{if(g[X]+Yd<180-1e-9){const w={...g};w[Y]=Yd;w[Z]=180-g[X]-Yd;w[z]=g[x]*sn(w[Z])/sn(g[X]);out.push({v:w})}});
+  return out.length?{s:out}:{e:'مفيش مثلث بالقيم دي.'}}
+ if(S.length==1&&A.length==2){const t=AN.find(k=>!A.includes(k));if(g[A[0]]+g[A[1]]>=180-1e-9)return{e:'مجموع الزاويتين لازم يكون أقل من 180°.'};
+  v[t]=180-g[A[0]]-g[A[1]];const k=S[0];SD.filter(s=>s!=k).forEach(m=>v[m]=g[k]*sn(v[O[m]])/sn(v[O[k]]));return{s:[{v}]}}
+ if(!S.length)return{e:'لازم تكتب ضلع واحد على الأقل. الزوايا لوحدها مش بتحدد حجم المثلث.'};
+ return{e:'القيم دي مش كفاية: اكتب 3 قيم (ضلع واحد على الأقل).'}}
+function kind(g){const nS=SD.filter(k=>g[k]!=null).length,A=AN.filter(k=>g[k]!=null);
+ if(nS==3)return'ثلاثة أضلاع (SSS) — بنستخدم قانون جيب التمام';
+ if(nS==2){const m=SD.find(k=>g[k]==null);return O[A[0]]==m?'ضلعان وزاوية محصورة (SAS) — قانون جيب التمام':'ضلعان وزاوية غير محصورة (SSA) — قانون الجيب (ممكن حلّين)'}
+ return A.includes(O[SD.find(k=>g[k]!=null)])?'زاويتان وضلع مقابل لواحدة منهم (AAS) — مجموع الزوايا وقانون الجيب':'زاويتان والضلع المحصور بينهم (ASA) — مجموع الزوايا وقانون الجيب'}
+const strip=s=>{if(s[0]=='('&&s.slice(-1)==')'){let d=0;for(let i=0;i<s.length;i++){if(s[i]=='(')d++;if(s[i]==')'){d--;if(d==0&&i<s.length-1)return s}}return s.slice(1,-1)}return s};
+const frag=p=>{const m=p.split(/ ÷ | \/ /);return m.length==2?`<span class="fr"><span>${strip(m[0])}</span><span>${strip(m[1])}</span></span>`:p};
+const ln=l=>{const z=l.startsWith('= ');return(z?'= ':'')+(z?l.slice(2):l).split(' = ').map(frag).join(' = ')};
+function steps(v){
+ const kn=new Set(order),B=[],F=k=>SD.includes(k)?R(v[k]):v[k].toFixed(dec)+'°',W=k=>{const s=F(k);return/[√\/]/.test(s)?'('+s+')':s},ra=AN.find(k=>Math.abs(v[k]-90)<1e-7),h=ra&&O[ra],ac=AN.filter(k=>k!=ra),N=k=>SD.includes(k)?{a:'BC',b:'AC',c:'AB'}[k]:k,add=(t,l)=>B.push({t,l});
+ if(ra){const[l1,l2]=SD.filter(k=>k!=h);add(`المثلث قائم الزاوية عند ${ra}، والوتر هو ${N(h)}`,[`${N(h)}² = ${N(l1)}² + ${N(l2)}²`,`${W(h)}² = ${W(l1)}² + ${W(l2)}²`]);kn.add(ra)}
+const done=new Set(),tb=(t,fin)=>{const o=O[t],ad=O[ac.find(k=>k!=t)],s=Math.sin(v[t]*D),c=Math.cos(v[t]*D),tn=Math.tan(v[t]*D),g=(a,b,x)=>{const u=`${F(a)} ÷ ${F(b)}`,w=exd(x);return`${N(a)} ÷ ${N(b)} = ${u}`+(w!=u?' = '+w:'')};done.add(t);
+  add(`النسب المثلثية للزاوية ${t} (المقابل ${N(o)}، المجاور ${N(ad)}، الوتر ${N(h)})`,[`sin ${t} = المقابل ÷ الوتر = ${g(o,h,s)}`,`cos ${t} = المجاور ÷ الوتر = ${g(ad,h,c)}`,`tan ${t} = المقابل ÷ المجاور = sin ${t} ÷ cos ${t} = ${g(o,ad,tn)}`,`sec ${t} = 1 ÷ cos ${t} = الوتر ÷ المجاور = ${g(h,ad,1/c)}`,`csc ${t} = 1 ÷ sin ${t} = الوتر ÷ المقابل = ${g(h,o,1/s)}`,`cot ${t} = 1 ÷ tan ${t} = المجاور ÷ المقابل = cos ${t} ÷ sin ${t} = ${g(ad,o,1/tn)}`].concat(fin?[`${t} = ${F(t)}`]:[]))};
+ for(let it=0;it<9&&kn.size<6;it++){
+  const un=K.filter(k=>!kn.has(k)),as=AN.filter(k=>kn.has(k)),ss=SD.filter(k=>kn.has(k)),tA=un.find(k=>AN.includes(k)),tS=un.find(k=>SD.includes(k));
+  if(tA&&as.length==2){const[p,q]=as;add(`مجموع زوايا المثلث ${ra?'القائم الحادتين 90°':'180°'}`,ra?[`${tA} = 90° − ${p==ra?q:p}`,`= 90° − ${F(p==ra?q:p)} = ${F(tA)}`]:[`${tA} = 180° − ${p} − ${q}`,`= 180° − ${F(p)} − ${F(q)} = ${F(tA)}`]);kn.add(tA);continue}
+  if(ra&&tS&&ss.length==2){const[p,q]=ss;if(tS==h||p==h||q==h){const o=SD.filter(k=>k!=tS&&k!=h);
+    if(tS==h)add('نظرية فيثاغورس',[`${N(h)}² = ${N(o[0])}² + ${N(o[1])}²`,`= ${W(o[0])}² + ${W(o[1])}²`,`${N(h)} = ${F(h)}`]);else add('نظرية فيثاغورس',[`${N(tS)}² = ${N(h)}² − ${N(p==h?q:p)}²`,`= ${W(h)}² − ${W(p==h?q:p)}²`,`${N(tS)} = ${F(tS)}`]);kn.add(tS);continue}}
+  if(ra&&tA&&ss.length>=2){const t=tA,o=O[t],ad=SD.find(k=>k!=o&&k!=h);
+   tb(t,1);kn.add(t);continue}
+  if(ra&&tS&&ss.length==1){const th=ac.find(k=>kn.has(k)),s=ss[0],role=x=>x==h?'H':x==O[th]?'O':'A',m=tS,r=role(m)+role(s),nm={H:'الوتر',O:'المقابل',A:'المجاور'};
+   const[n,mul]={OH:['sin',1],AH:['cos',1],OA:['tan',1],HO:['sin',0],HA:['cos',0],AO:['tan',0]}[r],pair=mul?`${nm[role(m)]} ÷ ${nm[role(s)]}`:`${nm[role(s)]} ÷ ${nm[role(m)]}`;
+   add(`${n} ${th} = ${pair}`,[`${n} ${th} = ${pair} = ${mul?N(m)+' ÷ '+N(s):N(s)+' ÷ '+N(m)}`,`${n}(${F(th)}) = ${mul?N(m)+' ÷ '+W(s):W(s)+' ÷ '+N(m)}`,`${N(m)} = ${mul?W(s)+' × '+n+'('+F(th)+')':W(s)+' ÷ '+n+'('+F(th)+')'}`,`${N(m)} = ${F(m)}`]);kn.add(m);continue}
+  if(!ra){
+   if(tA&&ss.length==3){const x=O[tA],[y,z]=SD.filter(k=>k!=x);add(`إيجاد الزاوية ${tA} بقانون جيب التمام`,[`cos ${tA} = (${y}² + ${z}² − ${x}²) / (2·${y}·${z})`,`= (${W(y)}² + ${W(z)}² − ${W(x)}²) / (2·${W(y)}·${W(z)})`,`${tA} = ${F(tA)}`]);kn.add(tA);continue}
+   if(tS&&kn.has(O[tS])&&ss.length==2&&!SD.some(k=>kn.has(k)&&kn.has(O[k]))){const x=tS,X=O[x],[y,z]=SD.filter(k=>k!=x);add(`إيجاد الضلع ${x} بقانون جيب التمام`,[`${x}² = ${y}² + ${z}² − 2·${y}·${z}·cos ${X}`,`= ${W(y)}² + ${W(z)}² − 2·${W(y)}·${W(z)}·cos(${F(X)})`,`${x} = ${F(x)}`]);kn.add(x);continue}
+   const pr=SD.find(k=>kn.has(k)&&kn.has(O[k]));
+   if(pr){const X=O[pr],tY=un.find(k=>AN.includes(k)&&kn.has(O[k])),tz=un.find(k=>SD.includes(k)&&kn.has(O[k]));
+    if(tY){const Y=tY,y=O[Y];add('إيجاد الزاوية بقانون الجيب',[`sin ${Y} / ${y} = sin ${X} / ${pr}`,`sin ${Y} = ${W(y)} × sin(${F(X)}) ÷ ${W(pr)}`,`${Y} = ${F(Y)}${res.s.length>1?'  (والحل التاني: '+(180-v[Y]).toFixed(dec)+'°)':''}`]);kn.add(Y);continue}
+    if(tz){add('إيجاد الضلع بقانون الجيب',[`${tz} / sin ${O[tz]} = ${pr} / sin ${X}`,`${tz} = ${W(pr)} × sin(${F(O[tz])}) ÷ sin(${F(X)})`,`${tz} = ${F(tz)}`]);kn.add(tz);continue}}}
+  break}
+ if(ra)ac.forEach(t=>{if(!done.has(t))tb(t)});
+ return B}
+const tr=x=>!isFinite(x)||Math.abs(x)>1e9?'∞':''+ +x.toFixed(4);
+const ex=x=>{if(!isFinite(x)||Math.abs(x)>1e9)return null;if(Math.abs(x)<1e-9)return'0';if(x<0){const e=ex(-x);return e&&'−'+e}const r=Math.round(x);if(Math.abs(x-r)<1e-9)return''+r;for(let q=2;q<=24;q++){const p=Math.round(x*q);if(Math.abs(x*q-p)<1e-9&&gcd(p,q)==1)return p+'/'+q}return rad(x)},exd=x=>{const e=ex(x);return e?e.replace('/',' ÷ '):tr(x)},fx=e=>{const m=e.split('/');return m.length==2?`<span class="fr"><span>${m[0]}</span><span>${m[1]}</span></span>`:e};
+function info(){const g={},bad=[];
+ order.forEach(k=>{try{const x=parse($('i_'+k).value);if(!(x>0)||(AN.includes(k)&&x>=180))throw 0;g[k]=x}catch(e){bad.push(k)}});
+ return{g,bad}}
+function refresh(){
+ const{g,bad}=info();res=null;
+ K.forEach(k=>{$('i_'+k).className=(order.includes(k)?'giv':'cmp')+(bad.includes(k)?' bad':'')});
+ const stt=$('stt');
+ if(bad.length)stt.textContent='فيه قيمة مش مفهومة. اكتب رقم أو جذر زي √2 أو 3√5 أو sqrt(12)، والزوايا لازم تكون بين 0 و180.';
+ else if(order.length<3)stt.textContent='اكتب '+(3-order.length)+' قيم كمان (ضلع واحد على الأقل) وباقي المثلث هيظهر.';
+ else{const r=solve(g);if(r.e)stt.textContent=r.e;else{res=r;sel=Math.min(sel,r.s.length-1);stt.innerHTML=kind(g)+(r.s.length>1?'<div class="chips" style="margin-top:8px">'+r.s.map((_,i)=>`<button data-s="${i}" class="${i==sel?'on':''}">الحل ${i+1}</button>`).join('')+'</div>':'')}}
+ if(!res){K.filter(k=>!order.includes(k)).forEach(k=>$('i_'+k).value='');['tt','pr','sp'].forEach(i=>$(i).innerHTML='');$('sv').innerHTML='';return}
+ const v=res.s[sel].v;K.filter(k=>!order.includes(k)).forEach(k=>$('i_'+k).value=SD.includes(k)?R(v[k]):v[k].toFixed(dec));
+ draw(v);table(v);props(v);
+ $('sp').innerHTML=steps(v).map((s,i)=>`<div class="st"><b>${i+1}</b><div><div>${ln(s.t)}</div><pre>${s.l.map(l=>'<div>'+ln(l)+'</div>').join('')}</pre></div></div>`).join('')||'<p style="color:var(--mu)">القيم كلها معطاة.</p>'}
+function table(v){const rows=[['sin','sin',x=>Math.sin(x*D),'المقابل ÷ الوتر'],['cos','cos',x=>Math.cos(x*D),'المجاور ÷ الوتر'],['tan','tan',x=>Math.tan(x*D),'المقابل ÷ المجاور = sin ÷ cos'],['csc','csc',x=>1/Math.sin(x*D),'1 ÷ sin = الوتر ÷ المقابل'],['sec','sec',x=>1/Math.cos(x*D),'1 ÷ cos = الوتر ÷ المجاور'],['cot','cot',x=>1/Math.tan(x*D),'1 ÷ tan = المجاور ÷ المقابل = cos ÷ sin']];
+ $('tt').innerHTML='<tr><th>النسبة</th>'+AN.map(k=>`<th class="n" style="color:${CL[k]}">${k} =<br><span class="mono">${v[k].toFixed(dec)}°</span></th>`).join('')+'</tr>'+rows.map(r=>`<tr><td><span class="mono" style="font-weight:600">${r[1]}</span><small style="display:block;color:var(--mu);font-size:12px;line-height:1.5">${ln(r[3])}</small></td>${AN.map(k=>{const x=r[2](v[k]),e=ex(x),d=tr(x);return'<td>'+(e&&e!=d?fx(e)+'<small style="display:block;color:var(--mu);font-size:12px">'+d+'</small>':d)+'</td>'}).join('')}</tr>`).join('')}
+function props(v){const{a,b,c}=v,p=a+b+c,s=p/2,ar=.5*b*c*Math.sin(v.A*D),eq=(x,y)=>Math.abs(x-y)<1e-9*Math.max(x,y),n=(eq(a,b)?1:0)+(eq(b,c)?1:0)+(eq(a,c)?1:0),mx=Math.max(v.A,v.B,v.C);
+ const ty=(Math.abs(mx-90)<1e-7?'قائم الزاوية':mx>90?'منفرج الزاوية':'حاد الزوايا')+' · '+(n==3?'متساوي الأضلاع':n?'متساوي الساقين':'مختلف الأضلاع'),m=(x,y,z)=>.5*Math.sqrt(2*y*y+2*z*z-x*x),d=x=>x.toFixed(dec);
+ const bx=(l,t)=>`<div class="pr"><small>${l}</small><div class="pv">${t}</div></div>`;
+ $('pr').innerHTML=`<div class="pr"><small>النوع</small><b>${ty}</b></div>`+bx('المحيط a+b+c',F2(p))+bx('نصف المحيط s',F2(s))+bx('المساحة (هيرون)',F2(ar))+bx('الارتفاعات',`ha ${d(2*ar/a)} · hb ${d(2*ar/b)} · hc ${d(2*ar/c)}`)+bx('المتوسطات',`ma ${d(m(a,b,c))} · mb ${d(m(b,a,c))} · mc ${d(m(c,a,b))}`)+bx('نصف قطر الدائرة المارة بالرؤوس R',d(a*b*c/(4*ar)))+bx('نصف قطر الدائرة الداخلية r',d(ar/s))}
+function draw(v){
+ if(!drag||!P){const w=Math.max(v.c,v.b*Math.cos(v.A*D),0)-Math.min(0,v.b*Math.cos(v.A*D)),h=v.b*Math.sin(v.A*D),mn=Math.min(0,v.b*Math.cos(v.A*D)),s=Math.min(300/w,170/h);
+  T={s,ox:(400-w*s)/2,oy:(300-h*s)/2+h*s*0+8,mn,h};P={};
+  const pt=(x,y)=>[T.ox+(x-mn)*s,T.oy+(h-y)*s];P.A=pt(0,0);P.B=pt(v.c,0);P.C=pt(v.b*Math.cos(v.A*D),v.b*Math.sin(v.A*D))}
+ const{A,B,C}=P,Pp={A,B,C},L=(p,q)=>`<line x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"`,mid=(p,q)=>[(p[0]+q[0])/2,(p[1]+q[1])/2],dist=(p,q)=>Math.hypot(p[0]-q[0],p[1]-q[1]);
+ let s='';
+ if(on.grid){for(let x=A[0]%T.s;x<400;x+=T.s)s+=`<line x1="${x}" y1="0" x2="${x}" y2="300" stroke="#2a3d3a" stroke-width=".5"/>`;for(let y=A[1]%T.s;y<300;y+=T.s)s+=`<line x1="0" y1="${y}" x2="400" y2="${y}" stroke="#2a3d3a" stroke-width=".5"/>`}
+ const ct=[(A[0]+B[0]+C[0])/3,(A[1]+B[1]+C[1])/3],px={a:dist(B,C),b:dist(A,C),c:dist(A,B)};
+ s+=`<polygon points="${A} ${B} ${C}" fill="#1a3b36" stroke="#eef" stroke-width="3" stroke-linejoin="round"/>`;
+ const opp={A:[B,C],B:[A,C],C:[A,B]},dsh=(p,q,c)=>L(p,q)+` stroke="${c}" stroke-width="2" stroke-dasharray="6 5"/>`;
+ if(on.alt)AN.forEach(k=>{const[p,q]=opp[k],V=Pp[k],dx=q[0]-p[0],dy=q[1]-p[1],t=((V[0]-p[0])*dx+(V[1]-p[1])*dy)/(dx*dx+dy*dy);s+=dsh(V,[p[0]+t*dx,p[1]+t*dy],'#b48cff')});
+ if(on.med)AN.forEach(k=>{const[p,q]=opp[k];s+=dsh(Pp[k],mid(p,q),'#ff6fa8')});
+ if(on.bis)AN.forEach(k=>{const[p,q]=opp[k],wp=px[O[SD.find(x=>O[x]!=k&&Pp[O[x]]==p)||'a']],a1=dist(Pp[k],p),a2=dist(Pp[k],q);s+=dsh(Pp[k],[(p[0]*a2+q[0]*a1)/(a1+a2),(p[1]*a2+q[1]*a1)/(a1+a2)],'#3ddbb0')});
+ if(on.circ){const d2=2*(A[0]*(B[1]-C[1])+B[0]*(C[1]-A[1])+C[0]*(A[1]-B[1])),q=x=>x[0]*x[0]+x[1]*x[1],ux=(q(A)*(B[1]-C[1])+q(B)*(C[1]-A[1])+q(C)*(A[1]-B[1]))/d2,uy=(q(A)*(C[0]-B[0])+q(B)*(A[0]-C[0])+q(C)*(B[0]-A[0]))/d2;s+=`<circle cx="${ux}" cy="${uy}" r="${dist([ux,uy],A)}" fill="none" stroke="#ffd166" stroke-width="2"/>`}
+ if(on.inc){const sp=px.a+px.b+px.c,ix=(px.a*A[0]+px.b*B[0]+px.c*C[0])/sp,iy=(px.a*A[1]+px.b*B[1]+px.c*C[1])/sp,ar=Math.abs((B[0]-A[0])*(C[1]-A[1])-(C[0]-A[0])*(B[1]-A[1]))/2;s+=`<circle cx="${ix}" cy="${iy}" r="${ar/(sp/2)}" fill="none" stroke="#3ddbb0" stroke-width="2"/>`}
+ AN.forEach(k=>{const V=Pp[k],[p,q]=opp[k],t1=Math.atan2(p[1]-V[1],p[0]-V[0]),t2=Math.atan2(q[1]-V[1],q[0]-V[0]);let df=t2-t1;while(df>Math.PI)df-=2*Math.PI;while(df<-Math.PI)df+=2*Math.PI;
+  const r=30,e=[V[0]+r*Math.cos(t1+df),V[1]+r*Math.sin(t1+df)],st=[V[0]+r*Math.cos(t1),V[1]+r*Math.sin(t1)],tm=t1+df/2;
+  s+=`<path d="M${V} L${st} A${r} ${r} 0 0 ${df>0?1:0} ${e} Z" fill="${CL[k]}" fill-opacity=".3" stroke="${CL[k]}"/><text x="${V[0]+(r+26)*Math.cos(tm)}" y="${V[1]+(r+26)*Math.sin(tm)}" fill="${CL[k]}" font-family="JetBrains Mono,monospace" font-size="15" font-weight="600" text-anchor="middle" dominant-baseline="middle">${v[k].toFixed(dec)}°</text>`});
+ SD.forEach(k=>{const[p,q]=opp[O[k]],m=mid(p,q),dx=m[0]-ct[0],dy=m[1]-ct[1],l=Math.hypot(dx,dy)||1;s+=`<text x="${m[0]+dx/l*(k=='c'?26:30)}" y="${m[1]+dy/l*(k=='c'?26:22)}" fill="${CL[k]}" font-family="JetBrains Mono,monospace" font-size="16" font-weight="600" text-anchor="middle" dominant-baseline="middle" direction="ltr">${k} = ${R(v[k])}</text>`});
+ AN.forEach(k=>{const V=Pp[k],dx=V[0]-ct[0],dy=V[1]-ct[1],l=Math.hypot(dx,dy)||1;s+=`<text x="${V[0]+dx/l*34}" y="${V[1]+dy/l*34}" fill="${CL[k]}" font-size="26" font-weight="700" font-family="JetBrains Mono,monospace" text-anchor="middle" dominant-baseline="middle">${k}</text><circle data-k="${k}" cx="${V[0]}" cy="${V[1]}" r="14" fill="#0e1514" fill-opacity=".4" stroke="${CL[k]}" stroke-width="4" style="cursor:grab"/>`});
+ $('sv').innerHTML=s}
+$('sv').addEventListener('pointerdown',e=>{const k=e.target.dataset&&e.target.dataset.k;if(k&&res){drag=k;e.target.setPointerCapture(e.pointerId);e.preventDefault()}});
+$('sv').addEventListener('pointermove',e=>{if(!drag)return;const sv=$('sv'),pt=sv.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const q=pt.matrixTransform(sv.getScreenCTM().inverse());
+ const np={...P,[drag]:[Math.max(10,Math.min(390,q.x)),Math.max(10,Math.min(290,q.y))]},d=(p,r)=>Math.hypot(p[0]-r[0],p[1]-r[1])/T.s,a=d(np.B,np.C),b=d(np.A,np.C),c=d(np.A,np.B);
+ if(a+b<=c+1e-6||a+c<=b+1e-6||b+c<=a+1e-6||a<.01||b<.01||c<.01)return;
+ P=np;order=['a','b','c'];$('i_a').value=a.toFixed(dec);$('i_b').value=b.toFixed(dec);$('i_c').value=c.toFixed(dec);refresh()});
+['pointerup','pointercancel'].forEach(t=>$('sv').addEventListener(t,()=>{if(drag){drag=null;refresh()}}));
+K.forEach(k=>{const w=document.createElement('div'),sd=SD.includes(k);
+ w.innerHTML=`<label><span class="tag" style="background:${CL[k]}">${k}</span>${sd?'مقابل '+O[k]:'عند الرأس '+k}</label><input id="i_${k}" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="${k}">`;
+ $(sd?'rs':'ra').appendChild(w);const e=w.querySelector('input');e.addEventListener('focus',()=>foc=k);
+ e.addEventListener('input',()=>{P=null;order=order.filter(x=>x!=k);if(e.value.trim())order.push(k);while(order.length>3)order.shift();sel=0;refresh()})});
+['√','(',')','/','^','+','−','π'].forEach(t=>{const b=document.createElement('button');b.textContent=t;b.type='button';b.addEventListener('pointerdown',e=>e.preventDefault());
+ b.addEventListener('click',()=>{const e=$('i_'+foc);e.focus();const s=e.selectionStart??e.value.length;e.setRangeText(t=='√'?'√':t,s,e.selectionEnd??s,'end');e.dispatchEvent(new Event('input'))});$('kb').appendChild(b)});
+const EX=[['(SSS) 3-4-5',{a:'3',b:'4',c:'5'}],['ضلعان وزاوية (SAS)',{b:'5',c:'7',A:'60'}],['ASA',{A:'40',B:'60',c:'7'}],['AAS',{A:'50',B:'60',a:'8'}],['حلّان (SSA)',{a:'6',b:'8',A:'30'}],['بالجذور √2 √2 2',{a:'√2',b:'√2',c:'2'}],['بالجذور 30-60-90',{C:'90',A:'30',c:'2√3'}]];
+EX.forEach(([n,o])=>{const b=document.createElement('button');b.textContent=n;b.addEventListener('click',()=>{K.forEach(k=>$('i_'+k).value='');order=Object.keys(o);order.forEach(k=>$('i_'+k).value=o[k]);P=null;sel=0;refresh()});$('ex').appendChild(b)});
+[['grid','شبكة'],['alt','الارتفاعات'],['med','المتوسطات'],['bis','منصّفات الزوايا'],['circ','الدائرة المارة بالرؤوس'],['inc','الدائرة الداخلية']].forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.addEventListener('click',()=>{on[k]=!on[k];b.classList.toggle('on',on[k]);if(res)draw(res.s[sel].v)});$('ov').appendChild(b)});
+$('stt').addEventListener('click',e=>{const s=e.target.dataset&&e.target.dataset.s;if(s!=null){sel=+s;P=null;refresh()}});
+$('clr').addEventListener('click',()=>{K.forEach(k=>$('i_'+k).value='');order=[];P=null;sel=0;refresh()});
+$('dec').addEventListener('change',e=>{dec=+e.target.value;P=null;refresh()});
+refresh();
+</script></body></html>
